@@ -1,22 +1,28 @@
 import { View, Text, StyleSheet } from "react-native";
 import React from "react";
+import { useSelector } from "react-redux";
+import { selectDeliveryFree, selectSubTotal } from "../store/cartSlice";
 
 const ShoppingCartFooter = () => {
-  return (
+  const subTotal = useSelector(selectSubTotal);
+  const deliveryFee = useSelector(selectDeliveryFree);
+  return subTotal > 0 ? (
     <View style={styles.totalsContainer}>
       <View style={styles.row}>
         <Text style={styles.text}>Subtotal</Text>
-        <Text style={styles.text}>$410</Text>
+        <Text style={styles.text}>${subTotal}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.text}>Delivery</Text>
-        <Text style={styles.text}>$10</Text>
+        <Text style={styles.text}>${deliveryFee}</Text>
       </View>
       <View style={styles.row}>
         <Text style={styles.textBold}>Total</Text>
-        <Text style={styles.text}>$420</Text>
+        <Text style={styles.text}>${subTotal + deliveryFee}</Text>
       </View>
     </View>
+  ) : (
+    ""
   );
 };
 
