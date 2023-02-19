@@ -6,15 +6,16 @@ import {
   TouchableOpacity,
 } from "react-native";
 import React from "react";
-import cart from "../data/cart";
 import CartListItem from "../components/CartListItem";
 import ShoppingCartFooter from "../components/ShoppingCartFooter";
+import { useSelector } from "react-redux";
 
 const ShoppingCart = () => {
+  const cartItems = useSelector(state => state.cart.items);
   return (
     <React.Fragment>
       <FlatList
-        data={cart}
+        data={cartItems}
         renderItem={({ item }) => <CartListItem cartItem={item} />}
         ListFooterComponent={ShoppingCartFooter}
       />
